@@ -1,0 +1,45 @@
+body
+{
+    font-family: Arial;
+    font-size: 14px;
+}
+a {
+    color: blue;
+    text-decoration: none;
+    font-size: 14px;
+}
+a:hover
+{
+    text-decoration: underline;
+}
+#Materias {
+    width:600px;
+    height:30px;
+    border: 1px solid #e5a900;
+    margin-top:-5px;
+    font-size: 16px;
+    font-family: cursive;
+    margin-left: 11px;
+}
+#fecha{
+    width:600px;
+    height:30px;
+    border: 1px solid #e5a900;
+    margin-top:-5px;
+    font-size: 16px;
+    font-family: cursive;
+    margin-left: 10px;
+}
+#form_button{
+    font-size: 16px;
+    background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
+    border: 1px solid #e5a900;
+    color: #4E4D4B;
+    font-weight: bold;
+    cursor: pointer;
+    width: 300px;
+    border-radius: 5px;
+    padding: 10px 0;
+    outline: none;
+    margin-top: 20px;
+    margin-left: 100px;
