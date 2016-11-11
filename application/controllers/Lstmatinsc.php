@@ -1,5 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//* @name Lstmatinsc.php
+//* @author Prof. Ing. Pablo Eduardo Hernandez
+//* @Fecha: Octubre 2016
+//* @Funcion: este controlador sirve tiene 2 metodos, muestra la lista de alumnos que se inscribieron a cierta materia
+//* @Perfiles: Admin y Bedel
+
 
 class Lstmatinsc extends CI_Controller
 {
@@ -7,6 +13,20 @@ class Lstmatinsc extends CI_Controller
     function __construct()
     {
         parent::__construct();
+
+        /* Me fijo si tengo un usuario valido*/
+        if(empty($_SESSION['id_user']))
+        {
+            $this->session->set_flashdata('flash_data','Debe estar logueado para operar ');
+            redirect('login');
+        }
+
+        /* Me fijo si el perfil del usuario corresponde con el rol que deberia ser para esta clase*/
+        if(($_SESSION['rol'] <> "admin") AND ($_SESSION['rol'] <> "bedel"))
+        {
+            redirect('home');
+        }
+
 
         /* Standard Libraries of codeigniter are required */
         $this->load->database('default');

@@ -1,12 +1,33 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//* @name Inscfinales.php
+//* @author Prof. Ing. Pablo Eduardo Hernandez
+//* @Fecha: Octubre 2016
+//* @Funcion: este controlador sirve para la inscripcion de los alumos a las materias
+//* @Perfiles: Alumno
+
+
+
 class Inscmaterias extends CI_Controller
 {
 
     function __construct()
     {
         parent::__construct();
+
+        /* Me fijo si tengo un usuario valido*/
+        if(empty($_SESSION['id_user']))
+        {
+            $this->session->set_flashdata('flash_data','Debe estar logueado para operar ');
+            redirect('login');
+        }
+
+        /* Me fijo si el perfil del usuario corresponde con el rol que deberia ser para esta clase*/
+        if($_SESSION['rol'] <> "alumno")
+        {
+            redirect('home');
+        }
 
         /* Standard Libraries of codeigniter are required */
         $this->load->database('default');

@@ -19,9 +19,7 @@ class Main extends CI_Controller {
 
     public function index()
     {
-        echo "<h1>Welcome to the world of Codeigniter</h1>";//Just an example to ensure that we get into the function
-        print_r($_SESSION);
-        die();
+      redirect('home');
 
     }
 
@@ -68,7 +66,7 @@ class Main extends CI_Controller {
         $this->_example_output($output);
     }
 
-public function alumno_materia()
+    public function alumno_materia()
     {
 
         $this->grocery_crud->set_table('materia_alumno');
@@ -105,6 +103,4 @@ public function alumno_materia()
 
 }
 
-/* End of file main.php */
-/* Location: ./application/controllers/main.php */
 
