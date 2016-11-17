@@ -76,6 +76,12 @@
 <!-- End of header-->
 <div style='height:30px;'></div>
 <div style="text-align: center">
+    <p><strong>Esta inscripción reviste caracter de declaración jurada</strong></p>
+    <p>Por disposición no se puede inscribir en dos asignaturas en la misma fecha</p>
+    <p>Ante cualquier duda presentarse en <strong>Bedelia</strong> junto con libreta de estudiantes</p>
+</div>
+<div style='height:30px;'></div>
+<div style="text-align: center">
 <?php echo form_label("Materia: "),form_dropdown('selMaterias', $arrMaterias,'','id="Materias"'); ?>
 <br />
 </div>
@@ -88,6 +94,8 @@
     <div style="text-align: center">
         <input id="form_button" type="button" value="Continuar" onclick="inscribirse();" />
     </div>
+
+
 
 
 <!-- Beginning footer -->

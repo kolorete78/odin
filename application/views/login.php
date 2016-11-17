@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Login Page</title>
+    <title>Pagina de Ingreso</title>
     <style>
         /* Basics */
         html, body {
@@ -156,6 +156,7 @@
         <div id="lower">
             <input type="submit" value="Login">
         </div><!--/ lower-->
+        <a href=<?php echo base_url(); ?>index.php/forgotpassword>Olvide mi contraseña</a>
     </form>
 </div><!--/ container-->
 <!-- End Page Content -->

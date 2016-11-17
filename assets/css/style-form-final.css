@@ -12,6 +12,15 @@ a:hover
 {
     text-decoration: underline;
 }
+p {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-family: cursive;
+    font-size: 18px;
+}
 #Materias {
     width:600px;
     height:30px;
@@ -42,4 +51,4 @@ a:hover
     padding: 10px 0;
     outline: none;
     margin-top: 20px;
-    margin-left: 100px;
+    }

@@ -82,6 +82,8 @@ class Main extends CI_Controller {
     public function alumnos()
     {
         $this->grocery_crud->set_table('alumno');
+        $this->grocery_crud->set_subject('Alumno');
+        $this->grocery_crud->required_fields('alumno_nombre','alumno_legajo','alumno_dni','comision');
 
         $output = $this->grocery_crud->render();
         $this->_example_output($output);
@@ -91,6 +93,9 @@ class Main extends CI_Controller {
     {
 
         $this->grocery_crud->set_table('materia_alumno');
+        $this->grocery_crud->set_subject('Inscripcion');
+        $this->grocery_crud->required_fields('carrera_id','materia_id','alumno_id','profesor_id');
+
 
         $this->grocery_crud->display_as("carrera_id","Carrera");
         $this->grocery_crud->set_relation('carrera_id','carrera','carrera_nombre');
@@ -109,6 +114,15 @@ class Main extends CI_Controller {
         $this->grocery_crud->display_as("2Parcial","Segundo Parcial");
         $this->grocery_crud->display_as("1Recu","Primer Recuperatorio");
         $this->grocery_crud->display_as("2Recu","Segundo Recuperatorio");
+
+
+        $this->grocery_crud->columns('alumno_id','carrera_id','profesor_id','materia_id','1Parcial',
+            '2Parcial','1Recu','2Recu','tp','Final','fecha_final' );
+        $this->grocery_crud->add_fields('alumno_id','carrera_id','profesor_id','materia_id','1Parcial',
+            '2Parcial','1Recu','2Recu','tp','Final','fecha_final');
+        $this->grocery_crud->edit_fields('alumno_id','carrera_id','profesor_id','materia_id','1Parcial',
+            '2Parcial','1Recu','2Recu','tp','Final','fecha_final' );
+
 
         $output = $this->grocery_crud->render();
         $this->_example_output($output);

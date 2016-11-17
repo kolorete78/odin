@@ -16,20 +16,39 @@ class Altafinal_model extends CI_Model
         // que no esten inscriptos en esa materia
 
 
-        $query= $this->db->query("
-        SELECT materia_id, materia_nombre FROM materia WHERE materia_id IN
-        (SELECT materia_id FROM materia_alumno WHERE
-          alumno_id in (SELECT alumno_id FROM alumno WHERE alumno_dni= {$_SESSION['username']})
-        AND  (materia_alumno.tp like 'Aprobado')
-        AND (1Parcial >= '4' OR 1Recu >= '4' )
-        AND (2Parcial >= '4' OR 2Recu >= '4')
-        AND (materia_id NOT IN
-                (SELECT final_mat_id from fechafinales WHERE final_id
-                IN (SELECT inscfinal_final_id FROM inscripcionfinales WHERE
-                insfinal_alumno_id IN (SELECT alumno_id FROM alumno WHERE alumno_dni={$_SESSION['username']})))))");
+        //$query= $this->db->query("
+        //SELECT materia_id, materia_nombre FROM materia WHERE materia_id IN
+        //(SELECT materia_id FROM materia_alumno WHERE
+         // alumno_id in (SELECT alumno_id FROM alumno WHERE alumno_dni= {$_SESSION['username']})
+        //AND  (materia_alumno.tp like 'Aprobado')
+        //AND (1Parcial >= 4 OR 1Recu >= 4 )
+        //AND (2Parcial >= 4 OR 2Recu >= 4)
+        //AND (materia_id IN
+          //      (SELECT final_mat_id from fechafinales WHERE final_id
+          //      IN (SELECT inscfinal_final_id FROM inscripcionfinales WHERE
+          //      insfinal_alumno_id IN (SELECT alumno_id FROM alumno WHERE alumno_dni={$_SESSION['username']})
+          //      AND inscripcionfinales.inscfinal_alumno_ausente = TRUE ))))");
+
+        $query=$this->db->query("SELECT materia.materia_id, materia.materia_nombre from materia
+WHERE materia.materia_id IN (SELECT materia_id FROM materia_alumno WHERE alumno_id IN
+        (SELECT alumno_id FROM alumno WHERE alumno_dni= {$_SESSION['username']})
+AND (materia_alumno.tp like 'Aprobado')
+AND (1Parcial >= 4 OR 1Recu >= 4 )
+AND (2Parcial >= 4 OR 2Recu >= 4)
+AND (Final < 4)
+AND (materia.materia_id NOT IN
+        (SELECT final_mat_id FROM fechafinales
+       WHERE final_id IN (SELECT inscfinal_final_id FROM inscripcionfinales
+         WHERE (insfinal_alumno_id = (SELECT alumno_id FROM alumno WHERE alumno_dni= {$_SESSION['username']}) AND
+         inscripcionfinales.inscfinal_alumno_ausente = 'TRUE'
+               )))))");
+
+
+
 
         // si hay resultados
-        if ($query->num_rows() > 0) {
+	$affectedrows = $this->db->affected_rows();
+        if ($affectedrows > 0 ) {
             // almacenamos en una matriz bidimensional
             //$arrDatos[htmlspecialchars('0')]=htmlspecialchars('Seleccionar');
             $arrDatos[0]='Seleccionar';

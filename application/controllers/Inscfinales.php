@@ -52,12 +52,20 @@ class Inscfinales extends CI_Controller
         $output = null;
 
 
-;          foreach ($districtData['districtDrop'] as $row)
-          {
+        if (!empty ($districtData)) {
+            foreach ($districtData['districtDrop'] as $row) {
 
-             $output .= "<option value='".$row->final_fecha."'>". $row->final_fecha."</option>";
-          }
-      echo $output;
+                $output .= "<option value='" . $row->final_fecha . "'>" . $row->final_fecha . "</option>";
+            }
+        }
+          if($districtData = null)
+          {
+                 $output = "<option value='Seleccionar'> Seleccionar</option>";
+            }
+
+
+
+        echo $output;
 
     }
 
@@ -66,8 +74,7 @@ class Inscfinales extends CI_Controller
         $materia_id  = $_GET['materia_id'];
         $fecha = $_GET['fecha'];
 
-
-        if ($fecha<>" Seleccionar" and isset($materia_id)){
+         if ($fecha<>0 and isset($materia_id)){
              $materia_nombre = $this->Altafinal_model->materia_nombre($materia_id);
              $this->Altafinal_model->grabar_final($materia_id,$fecha);
             echo json_encode('Su inscripcion fue correcta para la materia: ' . $materia_nombre . ' en la fecha: ' . $fecha);
