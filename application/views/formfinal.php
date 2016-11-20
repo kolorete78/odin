@@ -18,6 +18,7 @@
                 <script type="text/javascript">
                     $(document).ready(function() {
                         $("#Materias").change(function(){
+                            $("#fecha > option").remove(); //borramos los anteriores
                             /*dropdown post *///
                                 $.ajax({
                                 url:"<?php echo base_url();?>index.php/Inscfinales/dropfechas",

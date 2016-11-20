@@ -77,8 +77,22 @@ class Inscfinales extends CI_Controller
          if ($fecha<>0 and isset($materia_id)){
              $materia_nombre = $this->Altafinal_model->materia_nombre($materia_id);
              $this->Altafinal_model->grabar_final($materia_id,$fecha);
-            echo json_encode('Su inscripcion fue correcta para la materia: ' . $materia_nombre . ' en la fecha: ' . $fecha);
-        }else
+            //Preparo para mandar el email
+
+             $this->load->library('email');
+             $this->email->from('odin@ifts19.edu.ar', 'Odin IFTS19');
+             $this->email->reply_to('noreply@noreply.com','noreply');
+             $this->email->to($_SESSION['mail']);
+             $this->email->subject('Inscripción a final - Asignatura '. $materia_nombre . ' Fecha - ' . $fecha);
+             $this->email->message('Usted se inscribió correctamente para rendir el examen final de la asignatura '
+                 . $materia_nombre . ' en la fecha '. $fecha);
+             $this->email->send();
+
+             echo json_encode('Su inscripcion fue correcta para la asignatura: ' . $materia_nombre .
+                 ' en la fecha: ' . $fecha . ' se le envio un mail con estos datos a ' . $_SESSION['mail'] );
+
+
+         }else
         {echo "Debe completar todos los campos";}
 
 

@@ -55,7 +55,7 @@ class Alumno extends CI_Controller
 
         $crud->set_table('materia_alumno');
 
-        $crud->unset_columns('profesor_id','1Parcial','2Parcial','1Recu','2Recu',``);
+        $crud->unset_columns('profesor_id','1Parcial','2Parcial','1Recu','2Recu','tp');
         $crud->unset_delete();
         $crud->unset_add();
         $crud->unset_read();

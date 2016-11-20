@@ -32,9 +32,9 @@ class Altafinal_model extends CI_Model
         $query=$this->db->query("SELECT materia.materia_id, materia.materia_nombre from materia
 WHERE materia.materia_id IN (SELECT materia_id FROM materia_alumno WHERE alumno_id IN
         (SELECT alumno_id FROM alumno WHERE alumno_dni= {$_SESSION['username']})
-AND (materia_alumno.tp like 'Aprobado')
-AND (1Parcial >= 4 OR 1Recu >= 4 )
-AND (2Parcial >= 4 OR 2Recu >= 4)
+AND (materia_alumno.tp = 'Aprobado' OR materia_alumno.tp ='Equivalencia')
+AND (1Parcial >= 4 OR 1Parcial = 'E' OR 1Recu >= 4)
+AND (2Parcial >= 4 OR 1Parcial = 'E' OR 2Recu >= 4)
 AND (Final < 4)
 AND (materia.materia_id NOT IN
         (SELECT final_mat_id FROM fechafinales
