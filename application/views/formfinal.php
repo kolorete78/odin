@@ -19,6 +19,7 @@
                     $(document).ready(function() {
                         $("#Materias").change(function(){
                             $("#fecha > option").remove(); //borramos los anteriores
+
                             /*dropdown post *///
                                 $.ajax({
                                 url:"<?php echo base_url();?>index.php/Inscfinales/dropfechas",
@@ -36,15 +37,15 @@
         <script type="text/javascript">
 
             function inscribirse(){
+
+                document.getElementById('form_button').style.visibility='hidden';
                 var fecha = document.getElementById("fecha").value;
 
                 var data = {
                     materia_id : document.getElementById("Materias").value, fecha
                 };
 
-                //$.post("<?php echo base_url();?>index.php/Inscfinales/grabar",data)
-
-                $.get("<?php echo base_url();?>index.php/Inscfinales/grabar",data, function (resp) {
+               $.get("<?php echo base_url();?>index.php/Inscfinales/grabar",data, function (resp) {
                     alert(resp);
                     location.reload();
                 })
@@ -93,7 +94,7 @@
 <br />
     <div style='height:30px;'></div>
     <div style="text-align: center">
-        <input id="form_button" type="button" value="Continuar" onclick="inscribirse();" />
+        <input id="form_button" type="button" value="Continuar"  onclick="inscribirse();" />
     </div>
 
 

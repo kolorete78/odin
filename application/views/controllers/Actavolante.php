@@ -5,19 +5,6 @@ class Actavolante extends CI_Controller {
     {
         parent::__construct();
 
-        /* Me fijo si tengo un usuario valido*/
-        if(empty($_SESSION['id_user']))
-        {
-            $this->session->set_flashdata('flash_data','Debe estar logueado para operar ');
-            redirect('login');
-        }
-
-        /* Me fijo si el perfil del usuario corresponde con el rol que deberia ser para esta clase*/
-        if(($_SESSION['rol'] <> "admin") AND ($_SESSION['rol'] <> "bedel"))
-        {
-            redirect('home');
-        }
-
         $this->load->database('default');
         $this->load->helper('url');
         $this->load->library('grocery_CRUD');
@@ -31,7 +18,6 @@ class Actavolante extends CI_Controller {
     {
         $datos['arrMaterias'] = $this->Actavolante_model->get_materias();
         $datos['arrCarrera']=$this->Actavolante_model->get_carrera();
-        $datos['arrprofesores']=$this->Actavolante_model->get_profesores();
         $this->load->view('actavolante_view.php', $datos);
     }
 
@@ -66,13 +52,19 @@ class Actavolante extends CI_Controller {
 
 
         $materia_id  = $_GET['materia_id'];
+
         $materia_nombre  = $_GET['materia_nombre'];
+
         $fecha = $_GET['fecha'];
+
+
         $carrera = $_GET['carrera'];
+
+
         $cuatrimestre = $_GET['cuatrimestre'];
+
+
         $comision = $_GET['comision'];
-        $ano=$_GET['ano'];
-        $profesor=$_GET['profesores'];
 
 
         $materia_codigo = $this->Actavolante_model->materia_codigo($materia_id);
@@ -99,8 +91,6 @@ class Actavolante extends CI_Controller {
         $pdf->fecha=$fecha;
         $pdf->cuatrimestre=$cuatrimestre;
         $pdf->comision=$comision;
-        $pdf->ano=$ano;
-        $pdf->profesor=$profesor;
 
 
         // Agregamos una página
@@ -120,8 +110,8 @@ class Actavolante extends CI_Controller {
                  */
                 $pdf->AddPage();
                 $pdf->SetTitle("Lista de alumnos");
-                $pdf->SetLeftMargin(10);
-                $pdf->SetRightMargin(10);
+                $pdf->SetLeftMargin(15);
+                $pdf->SetRightMargin(15);
                 $pdf->SetFillColor(200, 200, 200);
 
                 // Se define el formato de fuente: Arial, negritas, tamaño 9
@@ -132,16 +122,16 @@ class Actavolante extends CI_Controller {
                  * $pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
                  */
 
-                $pdf->Cell(10, 7, 'Num', 'TLR', 0, 'C', '1');
+                $pdf->Cell(15, 7, 'Num', 'TLR', 0, 'C', '1');
                 $pdf->Cell(20, 7, 'DNI', 'TLR', 0, 'L', '1');
-                $pdf->Cell(70, 7, 'Alumno', 'TLR', 0, 'L', '1');
+                $pdf->Cell(60, 7, 'Alumno', 'TLR', 0, 'L', '1');
                 $pdf->Cell(30, 7, 'Examen Escrito', 'TLR', 0, 'C', '1');
                 $pdf->Cell(25, 7, 'Examen Oral', 'TLR', 0, 'C', '1');
                 $pdf->Cell(35, 7, 'Calificacion definitiva', 'TLR', 0, 'C', '1');
                 $pdf->Ln(7);
-                $pdf->Cell(10, 7, '', 'BLR', 0, 'C', '1');
+                $pdf->Cell(15, 7, '', 'BLR', 0, 'C', '1');
                 $pdf->Cell(20, 7, '', 'BLR', 0, 'L', '1');
-                $pdf->Cell(70, 7, '', 'BLR', 0, 'L', '1');
+                $pdf->Cell(60, 7, '', 'BLR', 0, 'L', '1');
                 $pdf->Cell(30, 7, 'Numero | Letra', 'TBLR', 0, 'C', '1');
                 $pdf->Cell(25, 7, 'Numero | Letra', 'TBLR', 0, 'C', '1');
                 $pdf->Cell(35, 7, 'Numero | Letra', 'TBLR', 0, 'C', '1');
@@ -150,10 +140,10 @@ class Actavolante extends CI_Controller {
 
 
             // se imprime el numero actual y despues se incrementa el valor de $x en uno
-            $pdf->Cell(10,5,$x++,'TBLR',0,'C',0);
+            $pdf->Cell(15,5,$x++,'TBLR',0,'C',0);
             // Se imprimen los datos de cada alumno
             $pdf->Cell(20,5,$alumno->DNI,'TBLR',0,'C',0);
-            $pdf->Cell(70,5,$alumno->Alumno,'TBLR',0,'L',0);
+            $pdf->Cell(60,5,$alumno->Alumno,'TBLR',0,'L',0);
             $pdf->Cell(30,5,'','TBLR',0,'C',0);
             $pdf->Cell(25,5,'','TBLR',0,'C',0);
             $pdf->Cell(35,5,'','TBLR',0,'C',0);
@@ -171,8 +161,7 @@ class Actavolante extends CI_Controller {
          *
          */
        $pdf->Output(FCPATH . "/downloads/" . $materia_nombre . "-" . $fecha . "-" . $comision .".pdf", 'F');
-
-        //force_download(FCPATH . "downloads/" . $materia_nombre . "-" . $fecha . "-" . $comision .".pdf",FCPATH . "downloads/" . $materia_nombre . "-" . $fecha . "-" . $comision .".pdf",TRUE);
+        force_download(FCPATH . "downloads/" . $materia_nombre . "-" . $fecha . "-" . $comision .".pdf",FCPATH . "downloads/" . $materia_nombre . "-" . $fecha . "-" . $comision .".pdf",TRUE);
     }
 
 

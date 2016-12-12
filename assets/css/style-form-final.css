@@ -30,6 +30,16 @@ p {
     font-family: cursive;
     margin-left: 11px;
 }
+#Carrera{
+    width:600px;
+    height:30px;
+    border: 1px solid #e5a900;
+    margin-top:-5px;
+    font-size: 16px;
+    font-family: cursive;
+    margin-left: 11px;
+
+}
 #fecha{
     width:600px;
     height:30px;
@@ -37,8 +47,46 @@ p {
     margin-top:-5px;
     font-size: 16px;
     font-family: cursive;
-    margin-left: 10px;
+    margin-left: 11px;
 }
+#comision{
+    width:600px;
+    height:30px;
+    border: 1px solid #e5a900;
+    margin-top:-5px;
+    font-size: 16px;
+    font-family: cursive;
+    margin-left: 11px;
+}
+#cuatrimestre{
+    width:600px;
+    height:30px;
+    border: 1px solid #e5a900;
+    margin-top:-5px;
+    font-size: 16px;
+    font-family: cursive;
+    margin-left: 11px;
+}
+#ano{
+    width:600px;
+    height:30px;
+    border: 1px solid #e5a900;
+    margin-top:-5px;
+    font-size: 16px;
+    font-family: cursive;
+    margin-left: 11px;
+}
+
+#Profesores{
+    width:600px;
+    height:30px;
+    border: 1px solid #e5a900;
+    margin-top:-5px;
+    font-size: 16px;
+    font-family: cursive;
+    margin-left: 11px;
+}
+
 #form_button{
     font-size: 16px;
     background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
